@@ -1,0 +1,120 @@
+<dom-module id="order-detail">
+
+  <template>
+
+    <div class="page-header">
+      <h1>天啦噜详情</h1>
+    </div>
+
+    <div class="row">
+      <img src="/images/每旬菜式.jpg" class="img-thumbnail" alt="Responsive image">
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>菜名</th>
+          <th>价格</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template is="dom-repeat" items="[[foods]]" as="food">
+          <tr>
+            <td>[[food.name]]</td>
+            <td>[[food.price]]</td>
+            <td><button type="button" name="food[[food.id]]">+1</button></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+
+    <div class="page-header">
+      <h2>已点</h2>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>菜名</th>
+          <th>价格</th>
+          <th>用户</th>
+          <th>备注</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template is="dom-repeat" items="[[userFoods]]" as="userFood">
+          <tr>
+            <td>[[userFood.name]]</td>
+            <td>[[userFood.price]]</td>
+            <td>[[userFood.user]]</td>
+            <td>[[userFood.remark]]</td>
+            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
+          </tr>
+        </template>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>合计</th>
+          <td>399</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="userFoodNameInput">菜名</label>
+        <input type="text" class="form-control" id="userFoodNameInput" placeholder="菜名">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="userFoodPriceInput">价格</label>
+        <input type="number" class="form-control" id="userFoodPriceInput" placeholder="价格">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="userFoodRemarkInput">备注</label>
+        <input type="text" class="form-control" id="userFoodRemarkInput" placeholder="备注">
+      </div>
+      <button type="submit" class="btn btn-primary">点菜</button>
+    </form>
+
+    <div class="row">
+      <h2><small>cat、dog查看了该天啦噜</small></h2>
+    </div>
+
+  </template>
+
+  <script>
+
+    Polymer({
+      is: 'order-detail',
+
+      properties: {
+        foods: {
+          type: Array,
+          value: function () {
+            return [
+              { id: 1, name: "梅菜扣肉", price: 13 },
+              { id: 2, name: "烧鹅饭", price: 17 },
+              { id: 3, name: "白切鸡拼手撕鸡", price: 15 },
+              { id: 4, name: "重庆水煮鱼", price: 18 }
+            ];
+          }
+        },
+        userFoods: {
+          type: Array,
+          value: function () {
+            return [
+              { id: 1, name: "梅菜扣肉", price: 13, user: "cat", remark: "超级辣" },
+              { id: 3, name: "白切鸡拼手撕鸡", price: 15, user: "dog", remark: "不加香菜" },
+            ];
+          }
+        }
+      }
+    });
+
+  </script>
+
+</dom-module>

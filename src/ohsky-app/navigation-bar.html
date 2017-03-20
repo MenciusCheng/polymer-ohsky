@@ -1,0 +1,42 @@
+<dom-module id="navigation-bar">
+  <template>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="[[titleLink]]">[[title]]</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <template is="dom-repeat" items="{{navs}}">
+              <template is="dom-if" if="[[item.active]]">
+                <li class="active"><a href="[[item.link]]">[[item.value]]</a></li>
+              </template>
+              <template is="dom-if" if="[[!item.active]]">
+                <li><a href="[[item.link]]">[[item.value]]</a></li>
+              </template>
+            </template>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  </template>
+  <script>
+    Polymer({
+      is: 'navigation-bar',
+      properties: {
+        title: String,
+        titleLink: String,
+        navs: {
+          type: Array // [{ value: String, name: String, link: String, active: Boolean }]
+        }
+      }
+    });
+  </script>
+</dom-module>

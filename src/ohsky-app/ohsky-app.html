@@ -1,0 +1,95 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="navigation-bar.html">
+<link rel="import" href="not-found.html">
+<link rel="import" href="ohsky-home.html">
+<link rel="import" href="order-edit.html">
+<link rel="import" href="order-detail.html">
+
+<dom-module id="ohsky-app">
+
+  <template>
+
+    <navigation-bar title="天啦噜" title-link="/ohsky-home" navs="[[navs]]"></navigation-bar>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subroute}}"></app-route>
+
+    <div class="container theme-showcase" role="main">
+
+      <iron-pages selected="[[page]]" attr-for-selected="name">
+        <ohsky-home name="ohsky-home"></ohsky-home>
+        <order-edit name="order-edit"></order-edit>
+        <order-detail name="order-detail"></order-detail>
+        <not-found name="not-found"></not-found>
+      </iron-pages>
+
+    </div>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      is: 'ohsky-app',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged',
+        },
+        navs: {
+          type: Array,
+          value: function () {
+            return [
+              { link: "/ohsky-home", name: "ohsky-home", value: "主页", active: true },
+              { link: "/order-edit", name: "order-edit", value: "编辑订单", active: false }
+            ]
+          }
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)',
+      ],
+
+      ready: function () {
+        ohsky = this;
+      },
+
+      _routePageChanged: function (page) {
+        this.page = page || 'ohsky-home';
+      },
+
+      _pageChanged: function (page) {
+        var resolvedPageUrl = this.resolveUrl(page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showNotFoundPage, true);
+        this.changeActiveNav(page);
+      },
+
+      // 显示找不到页面
+      _showNotFoundPage: function () {
+        this.page = 'not-found';
+      },
+
+      changeActiveNav: function (page) {
+        this.navs.forEach(function (nav, index) {
+          this.set("navs.#" + index + ".active", nav.name === page);
+        }, this);
+      }
+    });
+
+  </script>
+
+</dom-module>

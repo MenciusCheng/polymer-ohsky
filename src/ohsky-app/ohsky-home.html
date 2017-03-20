@@ -1,0 +1,80 @@
+<dom-module id="ohsky-home">
+
+  <template>
+
+    <a href="/order-edit" class="btn btn-primary">新建天啦噜</a>
+    <a href="#" class="btn btn-primary">从模板选择</a>
+
+    <div class="page-header">
+      <h1>广场 <small>进行中的天啦噜</small></h1>
+    </div>
+    <div class="list-group">
+      <template is="dom-repeat" items="{{orders}}" as="order">
+        <a href="/order-detail/[[order.id]]" class="list-group-item">[[order.name]] 发起人：[[order.user]] 结束时间为：[[order.endDate]]</a>
+      </template>
+    </div>
+
+    <!--<template is="dom-repeat" items="{{ppad}}">
+      <p>重复{{index}}, {{item.value}}</p>
+    </template>-->
+
+    <div class="page-header">
+      <h1>私宅 <small>我参与的天啦噜</small></h1>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'ohsky-home',
+
+      properties: {
+        orders: {
+          type: Array,
+          value: function () {
+            return [
+              { id: 1, name: "weiweicat at the door.", user: "weiweicat", status: "1", startDate: "2017-03-20 15:51:00", endDate: "2017-03-20 19:51:00" },
+              { id: 2, name: "weiweicat at the door.", user: "weiweicat", status: "1", startDate: "2017-03-20 15:51:00", endDate: "2017-03-20 19:51:00" },
+              { id: 3, name: "weiweicat at the door.", user: "weiweicat", status: "1", startDate: "2017-03-20 15:51:00", endDate: "2017-03-20 19:51:00" },
+              { id: 4, name: "weiweicat at the door.", user: "weiweicat", status: "1", startDate: "2017-03-20 15:51:00", endDate: "2017-03-20 19:51:00" },
+              { id: 5, name: "weiweicat at the door.", user: "weiweicat", status: "1", startDate: "2017-03-20 15:51:00", endDate: "2017-03-20 19:51:00" }
+            ];
+          }
+        },
+
+        ppad: {
+          type: Array,
+          value: function () {
+            return [
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+              { value: "weiweicat" },
+            ]
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>
+
